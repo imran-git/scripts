@@ -1,0 +1,9 @@
+Using screen only when logging in via SSH. This way, my SSH session is automatically resumed if I am disconnected for any reason. I do this by adding these lines to my ~/.bashrc:
+
+Code:
+if [ "$SSH_CONNECTION" ]; then
+    if [ -z "$STY" ]; then
+        # Screen is not currently running, but we are in SSH, so start a session
+        exec screen -d -R
+    fi
+fi
